@@ -1,9 +1,12 @@
 import React from "react"
-import {FlatList,StyleSheet}  from "react-natve"
+import {View,Text,FlatList,StyleSheet}  from "react-native"
+import {connect} from"react-redux"
 
-
-const ProductOverviewScreen = ()=>{
-    return <FlatList />
+const ProductOverviewScreen = (props)=>{
+    return (
+    <View style={styles.screen}>
+        <FlatList data={props.products} renderItem={itemData=><Text>{itemData.item.title}</Text>} />
+    </View>)
 }
 
 const styles = StyleSheet.create({
@@ -13,4 +16,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ProductOverviewScreen
+const  mapStateToProps=(state)=>{
+  return {
+      products:state.product.availableProducts
+  }
+}
+
+export default connect(mapStateToProps)(ProductOverviewScreen)
