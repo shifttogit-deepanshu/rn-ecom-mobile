@@ -12,7 +12,7 @@ const ProductItem = (props)=>{
             <Text style={styles.price}>${props.price.toFixed(2)}</Text>
             </View>
             <View style={styles.action}>
-            <Button title="View Details" color={Colors.primaryColor}/>
+            <Button title="View Details" color={Colors.primaryColor} onPress={()=>props.navigation.navigate('ProductDetailScreen',{productId:props.productId,productTitle:props.title})}/>
             <Button title="To Cart" color={Colors.primaryColor}/>
             </View>
         </View>

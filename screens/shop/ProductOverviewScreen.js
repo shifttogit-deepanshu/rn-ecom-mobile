@@ -1,5 +1,5 @@
 import React from "react"
-import {View,Text,FlatList,StyleSheet}  from "react-native"
+import {View,FlatList,StyleSheet}  from "react-native"
 import {connect} from"react-redux"
 import ProductItem from "../../Components/shop/ProductItem"
 
@@ -10,8 +10,8 @@ const ProductOverviewScreen = (props)=>{
             image={itemData.item.imageUrl}
             title={itemData.item.title}
             price={itemData.item.price}
-            
-            
+            navigation={props.navigation}
+            productId={itemData.item.id}            
             >{itemData.item.title}</ProductItem>} />
     </View>)
 }
