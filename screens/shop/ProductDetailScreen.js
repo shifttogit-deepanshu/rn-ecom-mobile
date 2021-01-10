@@ -12,16 +12,21 @@ const ProductDetailScreen = (props)=>{
 
 
     return (
-    <View style={styles.screen}>
-    <Text>Product Detail Screen {product.title}</Text>
-    </View>)
+    <ScrollView>
+        <Image style={styles.images} source={{uri:product.imageUrl}}/>
+        <Button title="Add To Cart"/>
+        <Text style={styles.price}>${product.price.toFixed(2)}</Text>
+        <Text style={styles.description}>{product.description}</Text>
+    </ScrollView>
+    )
 }
 
 const styles = StyleSheet.create({
-    screen:{
-        flex:1,
-        justifyContent:"center",
-    }
+    image:{
+        height:"100%",
+        width:"100%"
+    },
+    
 })
 
 const  mapStateToProps=(state)=>{

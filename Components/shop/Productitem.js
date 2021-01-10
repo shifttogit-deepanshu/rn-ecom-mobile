@@ -1,10 +1,13 @@
 import React from "react"
-import {View,StyleSheet,Text,Image, Button} from "react-native"
+import {View,StyleSheet,Text,Image, Button,TouchableNativeFeedback,Platform, Touchable} from "react-native"
+import { TouchableOpacity } from "react-native-gesture-handler"
 import Colors from "../../settings/Colors"
 
 
 const ProductItem = (props)=>{
+    let TouchableCmp = Platform.OS=='android' && Platform.Version>=21 ?TouchableNativeFeedback:TouchableOpacity
     return (
+        <TouchableCmp onPress={()=>props.navigation.navigate('ProductDetailScreen',{productId:props.productId,productTitle:props.title})}>     
         <View style={styles.product}>
             <Image style={styles.image} source={{uri:props.image}}/>
             <View style={styles.details}>
@@ -16,6 +19,7 @@ const ProductItem = (props)=>{
             <Button title="To Cart" color={Colors.primaryColor}/>
             </View>
         </View>
+        </TouchableCmp> 
     )
 }
 
