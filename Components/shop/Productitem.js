@@ -1,16 +1,19 @@
 import React from "react"
 import {View,StyleSheet,Text,Image, Button} from "react-native"
+import Colors from "../../settings/Colors"
 
 
 const ProductItem = (props)=>{
     return (
         <View style={styles.product}>
             <Image style={styles.image} source={{uri:props.image}}/>
-            <Text>{props.title}</Text>
-            <Text>${props.price.toFixed(2)}</Text>
-            <View>
-            <Button title="View Details" />
-            <Button title="To Cart" />
+            <View style={styles.details}>
+            <Text style={styles.title}>{props.title}</Text>
+            <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+            </View>
+            <View style={styles.action}>
+            <Button title="View Details" color={Colors.primaryColor}/>
+            <Button title="To Cart" color={Colors.primaryColor}/>
             </View>
         </View>
     )
@@ -30,6 +33,26 @@ const styles= StyleSheet.create({
     image:{
         width:"100%",
         height:'60%'
+    },
+    title:{
+        fontSize:16,
+        marginVertical:4
+    },
+    price:{
+        fontSize:14,
+        color:"#888"
+    },
+    details:{
+        height:"15%",
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    action:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+        paddingHorizontal:20,
+        height:"25%"
     }
 })
 
