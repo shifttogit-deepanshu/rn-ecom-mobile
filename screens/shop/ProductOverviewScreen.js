@@ -1,9 +1,22 @@
-import React from "react"
+import React,{useLayoutEffect} from "react"
 import {View,FlatList,StyleSheet}  from "react-native"
 import {connect} from"react-redux"
 import ProductItem from "../../Components/shop/ProductItem"
+import {HeaderButtons,Item} from 'react-navigation-header-buttons'
+  import IconheaderButton from "../../Components/UI/IconHeaderButton"
+  
 
 const ProductOverviewScreen = (props)=>{
+
+    useLayoutEffect(()=>{
+        props.navigation.setOptions({
+            headerRight:()=>(
+                <HeaderButtons HeaderButtonComponent={IconheaderButton} >
+                    <Item title="cart" iconName="cart" onPress={()=>{props.navigation.navigate('Cart')}} />
+                </HeaderButtons>
+            )
+        })
+    })
     return (
     <View style={styles.screen}>
         <FlatList data={props.products} renderItem={itemData=><ProductItem
