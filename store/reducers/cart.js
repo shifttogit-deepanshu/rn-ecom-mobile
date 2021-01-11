@@ -40,7 +40,7 @@ export const cartReducer = (state=initialState,action)=>{
             }
             else{
                 let newItemsobj = {...state.items}
-                delete newItemsobj.ProductId
+                delete newItemsobj[ProductId]
                 return {...state,items:newItemsobj}
             }
         default:
