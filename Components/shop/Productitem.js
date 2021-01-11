@@ -36,7 +36,7 @@ const styles= StyleSheet.create({
     },
     image:{
         width:"100%",
-        height:'60%'
+        height:"60%"
     },
     title:{
         fontSize:16,
