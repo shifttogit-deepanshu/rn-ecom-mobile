@@ -39,9 +39,11 @@ export const cartReducer = (state=initialState,action)=>{
                 return {...state,items:newItemsobj,totalAmount:total}
             }
             else{
+                const price = state.items[ProductId].productPrice
                 let newItemsobj = {...state.items}
                 delete newItemsobj[ProductId]
-                return {...state,items:newItemsobj}
+                const total = state.totalAmount - price
+                return {...state,items:newItemsobj,totalAmount:total}
             }
         default:
             return state
