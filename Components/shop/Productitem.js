@@ -32,7 +32,8 @@ const styles= StyleSheet.create({
         elevation:5,
         shadowRadius:10,
         height:300,
-        margin:20
+        margin:20,
+        backgroundColor:'white'
     },
     image:{
         width:"100%",
