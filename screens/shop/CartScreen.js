@@ -4,6 +4,7 @@ import Colors from "../../settings/Colors"
 import {connect} from "react-redux"
 import CartItem from "../../Components/shop/CartItem"
 
+
 const CartScreen = (props)=>{
 
     const transformedcartitems = []
@@ -25,7 +26,7 @@ const CartScreen = (props)=>{
         </View>
         <View>
         <FlatList data={transformedcartitems} renderItem={itemData=><CartItem quantity={itemData.item.quantity} title={itemData.item.title} 
-        amount={itemData.item.sum}/>} />
+        amount={itemData.item.sum} product={itemData.item}/>} />
         </View>
     </View>
     )
@@ -62,4 +63,6 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state)=>{
     return {totalAmount : state.cart.totalAmount,cartItems:state.cart.items}
 }
+
+
 export default connect(mapStateToProps)(CartScreen)

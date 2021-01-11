@@ -4,7 +4,7 @@ const initialState = {
     items: {},
     totalAmount : 0
 }
-
+import {REMOVE_FROM_CART} from "../actions/cart"
 export const cartReducer = (state=initialState,action)=>{
 
     switch(action.type){
@@ -26,7 +26,23 @@ export const cartReducer = (state=initialState,action)=>{
             newItemsobj[id] = new CART(1,itemToAdd.price,itemToAdd.title,itemToAdd.price)
             return {...state,items:newItemsobj,totalAmount:total}
             }
-
+        case REMOVE_FROM_CART:
+            const itemToRemove = action.productToRemove
+            const ProductId = itemToRemove.id
+            if(state.items[ProductId].quantity>1){
+                const price = state.items[ProductId].productPrice
+                const newQuantity = state.items[ProductId].quantity - 1
+                const newSum = price*newQuantity
+                const total = state.totalAmount - price
+                let newItemsobj = {...state.items}
+                newItemsobj[ProductId] = new CART(newQuantity,price,state.items[ProductId].productTitle,newSum)
+                return {...state,items:newItemsobj,totalAmount:total}
+            }
+            else{
+                let newItemsobj = {...state.items}
+                delete newItemsobj.ProductId
+                return {...state,items:newItemsobj}
+            }
         default:
             return state
     }

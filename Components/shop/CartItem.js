@@ -1,6 +1,8 @@
 import { Ionicons } from "@expo/vector-icons"
 import React from "react"
 import {View,Text,StyleSheet,TouchableOpacity} from "react-native"
+import {connect} from "react-redux"
+import {removeFromCart} from "../../store/actions/cart"
 
 const CartItem = (props)=>(
     <View style={styles.classItem}>
@@ -11,8 +13,8 @@ const CartItem = (props)=>(
     
     <View style={styles.itemData}>
         <Text style={styles.price}>{props.amount.toFixed(2)} </Text>
-        <TouchableOpacity style={styles.removeButton}>
-            <Ionicons name="trash" size={16} color="red"/>
+        <TouchableOpacity style={styles.removeButton} onPress={()=>props.remove(props.product)}>
+            <Ionicons name="trash" size={16} color="red" />
         </TouchableOpacity>
 
     </View>
@@ -41,5 +43,9 @@ const styles = StyleSheet.create({
         marginLeft:20
     }
 })
-
-export default CartItem
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        remove : (product)=>dispatch(removeFromCart(product))
+    }
+}
+export default connect(undefined,mapDispatchToProps)(CartItem)
