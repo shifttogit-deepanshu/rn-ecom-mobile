@@ -12,7 +12,7 @@ const ProductOverviewScreen = (props)=>{
         props.navigation.setOptions({
             headerRight:()=>(
                 <HeaderButtons HeaderButtonComponent={IconheaderButton} >
-                    <Item title="cart" iconName="cart" onPress={()=>{props.navigation.navigate('Cart')}} />
+                    <Item title="cart" iconName="ios-cart" onPress={()=>{props.navigation.navigate('Cart')}} />
                 </HeaderButtons>
             )
         })
