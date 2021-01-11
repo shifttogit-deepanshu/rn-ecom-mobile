@@ -22,7 +22,7 @@ const CartScreen = (props)=>{
     <View style={styles.screen}>
         <View style={styles.summary}>
         <Text style={styles.summaryText}>Total: <Text style={styles.amount}>${props.totalAmount.toFixed(2)}</Text></Text>
-        <Button title="Order Now"/>
+        <Button title="Order Now" color={Colors.accentColor}/>
         </View>
         <View>
         <FlatList data={transformedcartitems} renderItem={itemData=><CartItem quantity={itemData.item.quantity} title={itemData.item.title} 
