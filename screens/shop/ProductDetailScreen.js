@@ -2,6 +2,7 @@ import React from "react"
 import {View,ScrollView,Text,Button,Image,StyleSheet}  from "react-native"
 import Colors  from "../../settings/Colors"
 import {connect} from"react-redux"
+import { addToCart } from "../../store/actions/cart"
 
 const ProductDetailScreen = (props)=>{
     
@@ -15,7 +16,7 @@ const ProductDetailScreen = (props)=>{
     return (
     <ScrollView>
         <Image style={styles.images} source={{uri:product.imageUrl}}/>
-        <Button color={Colors.primaryColor} title="Add To Cart"/>
+        <Button color={Colors.primaryColor} title="Add To Cart" onPress={()=>props.toCart(product)}/>
         <Text style={styles.price}>${product.price.toFixed(2)}</Text>
         <Text style={styles.description}>{product.description}</Text>
     </ScrollView>
@@ -49,4 +50,10 @@ const  mapStateToProps=(state)=>{
   }
 }
 
-export default connect(mapStateToProps)(ProductDetailScreen)
+const mapDispatchToprops = (dispatch) =>{
+    return {
+        toCart : (id)=>dispatch(addToCart(id))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToprops)(ProductDetailScreen)
