@@ -3,7 +3,7 @@ import {View,FlatList,StyleSheet}  from "react-native"
 import {connect} from"react-redux"
 import ProductItem from "../../Components/shop/ProductItem"
 import {HeaderButtons,Item} from 'react-navigation-header-buttons'
-  import IconheaderButton from "../../Components/UI/IconHeaderButton"
+import IconheaderButton from "../../Components/UI/IconHeaderButton"
   
 
 const ProductOverviewScreen = (props)=>{
