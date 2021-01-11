@@ -1,4 +1,4 @@
-class Order{
+class ORDER{
     constructor(id,items,totalAmount,date){
         this.id=id;
         this.items=items;
@@ -7,4 +7,4 @@ class Order{
     }
 }
 
-export default Order
+export default ORDER
