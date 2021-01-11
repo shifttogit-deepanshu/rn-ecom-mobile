@@ -16,7 +16,7 @@ export const cartReducer = (state=initialState,action)=>{
                 let newItemsobj = {...state.items}
                 const newPrice = itemToAdd.price*newQuantity
                 newItemsobj[id] = new CART(newQuantity,itemToAdd.price,itemToAdd.title,newPrice)
-                const total = state.totalAmo + itemToAdd.price
+                const total = state.totalAmount + itemToAdd.price
                 return {...state,items:newItemsobj,totalAmount:total}
             
             }

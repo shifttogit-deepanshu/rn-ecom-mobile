@@ -24,7 +24,8 @@ const ProductOverviewScreen = (props)=>{
             title={itemData.item.title}
             price={itemData.item.price}
             navigation={props.navigation}
-            productId={itemData.item.id}            
+            productId={itemData.item.id}    
+            product={itemData.item}   
             >{itemData.item.title}</ProductItem>} />
     </View>)
 }

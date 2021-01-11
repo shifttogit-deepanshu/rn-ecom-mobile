@@ -2,7 +2,8 @@ import React from "react"
 import {View,StyleSheet,Text,Image, Button,TouchableNativeFeedback,Platform, Touchable} from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import Colors from "../../settings/Colors"
-
+import {connect} from "react-redux"
+import { addToCart } from "../../store/actions/cart"
 
 const ProductItem = (props)=>{
     let TouchableCmp = Platform.OS=='android' && Platform.Version>=21 ?TouchableNativeFeedback:TouchableOpacity
@@ -16,7 +17,7 @@ const ProductItem = (props)=>{
             </View>
             <View style={styles.action}>
             <Button title="View Details" color={Colors.primaryColor} onPress={()=>props.navigation.navigate('ProductDetailScreen',{productId:props.productId,productTitle:props.title})}/>
-            <Button title="To Cart" color={Colors.primaryColor}/>
+            <Button title="To Cart" color={Colors.primaryColor} onPress={()=>props.toCart(props.product)}/>
             </View>
         </View>
         </TouchableCmp> 
@@ -61,4 +62,9 @@ const styles= StyleSheet.create({
     }
 })
 
-export default ProductItem
+const mapDispatchToprops = (dispatch) =>{
+    return {
+        toCart : (id)=>dispatch(addToCart(id))
+    }
+}
+export default connect(undefined,mapDispatchToprops)(ProductItem)
