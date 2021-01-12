@@ -1,10 +1,21 @@
-import React from "react"
+import React,{useLayoutEffect} from "react"
 import {View,ScrollView,Text,Button,Image,StyleSheet}  from "react-native"
 import Colors  from "../../settings/Colors"
 import {connect} from"react-redux"
 import { addToCart } from "../../store/actions/cart"
+import {HeaderButtons,Item} from 'react-navigation-header-buttons'
+import IconheaderButton from "../../Components/UI/IconHeaderButton"
 
 const ProductDetailScreen = (props)=>{
+    useLayoutEffect(()=>{
+        props.navigation.setOptions({
+            headerRight:()=>(
+                <HeaderButtons HeaderButtonComponent={IconheaderButton} >
+                    <Item title="cart" iconName="ios-cart" onPress={()=>{props.navigation.navigate('Cart')}} />
+                </HeaderButtons>
+            ),
+        })
+    })
     
     const productId = props.route.params.productId
     const title = props.route.params.productTitle
