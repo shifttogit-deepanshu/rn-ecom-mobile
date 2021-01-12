@@ -8,6 +8,7 @@ import ProductDetailScreen from "../screens/shop/ProductDetailScreen"
 import Colors from "../settings/Colors"
 import CartScreen from "../screens/shop/CartScreen"
 import OrderScreen from "../screens/shop/OrderScreen";
+import {Ionicons} from "@expo/vector-icons"
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -17,7 +18,7 @@ const ProductStackNavigator = ()=>(
         headerStyle:{
             backgroundColor:Colors.primaryColor
         },
-        headerTintColor:"white"
+        headerTintColor:"white",
     }}>
         <Stack.Screen name="ProductOverviewScreen" component={ProductOverviewScreen} options={{
             title:"All Products"
@@ -43,9 +44,29 @@ const orderStackNavigator = ()=>(
 )
 
 const DrawerNavigator = ()=>(
-    <Drawer.Navigator>
-        <Drawer.Screen name="Products" component={ProductStackNavigator} />
-        <Drawer.Screen name="orders" component={orderStackNavigator} />
+    <Drawer.Navigator drawerContentOptions={{
+        activeTintColor:Colors.primaryColor
+    }}>
+        <Drawer.Screen name="Products" component={ProductStackNavigator} options={
+            {
+                drawerIcon: ({focused, size}) => (
+                    <Ionicons
+                      name="md-list"
+                      size={20}
+                      color={focused ? Colors.primaryColor : 'black'}
+                    />),
+            }
+        }/>
+        <Drawer.Screen name="orders" component={orderStackNavigator} options={
+            {
+                drawerIcon: ({focused, size}) => (
+                    <Ionicons
+                      name="md-cart"
+                      size={20}
+                      color={focused ? Colors.primaryColor : 'black'}
+                    />)
+            }
+        }/>
     </Drawer.Navigator>
 )
 
