@@ -5,6 +5,8 @@ const initialState = {
     totalAmount : 0
 }
 import {REMOVE_FROM_CART} from "../actions/cart"
+import {ADD_ORDER} from "../actions/order"
+
 export const cartReducer = (state=initialState,action)=>{
 
     switch(action.type){
@@ -45,6 +47,8 @@ export const cartReducer = (state=initialState,action)=>{
                 const total = state.totalAmount - price
                 return {...state,items:newItemsobj,totalAmount:total}
             }
+        case ADD_ORDER:
+            return initialState
         default:
             return state
     }
