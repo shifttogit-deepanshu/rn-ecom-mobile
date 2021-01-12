@@ -14,6 +14,11 @@ const ProductOverviewScreen = (props)=>{
                 <HeaderButtons HeaderButtonComponent={IconheaderButton} >
                     <Item title="cart" iconName="ios-cart" onPress={()=>{props.navigation.navigate('Cart')}} />
                 </HeaderButtons>
+            ),
+            headerLeft:()=>(
+                <HeaderButtons HeaderButtonComponent={IconheaderButton} >
+                    <Item title="menu" iconName="ios-menu" onPress={()=>{props.navigation.toggleDrawer()}} />
+                </HeaderButtons>
             )
         })
     })
