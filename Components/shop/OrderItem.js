@@ -4,17 +4,19 @@ import {View,StyleSheet,Text,Button} from "react-native"
 const OrderItem = (props)=>{
     return (
         <View>
-            <view>
-                <Text></Text>
-                <Text></Text>
-            </view>
-                <Button />
+            <View>
+                <Text>${props.price.toFixed(2)}</Text>
+                <Text>{props.date}</Text>
+            </View>
+                <Button title="View Details"/>
         </View>
     )
 }
 
-export default OrderItem
+
 
 const styles = StyleSheet.create({
     
 })
+
+export default OrderItem
