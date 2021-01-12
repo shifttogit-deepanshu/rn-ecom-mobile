@@ -16,8 +16,8 @@ const OrderScreen = (props)=>{
         })
     })
     return (
-
-        <FlatList data={props.orders} renderItem={itemData=><Text>{itemData.item.id}</Text>}/>
+        
+        <FlatList data={props.orders.orders} renderItem={itemData=><Text>{itemData.item.id}</Text>}/>
     )
 }
 
