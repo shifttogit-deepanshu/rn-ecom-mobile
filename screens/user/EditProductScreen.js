@@ -20,7 +20,7 @@ const EditProductScreen = (props)=>{
         props.navigation.setOptions({
             headerRight:()=>(
                 <HeaderButtons HeaderButtonComponent={IconheaderButton} >
-                    <Item title={prodId==0?"Add":"Edit"} onPress={()=>{props.navigation.navigate('Cart')}} />
+                    <Item title={prodId==0?"Add":"Edit"} onPress={()=>{console.log("submitting")}} />
                 </HeaderButtons>
             ),
         })
