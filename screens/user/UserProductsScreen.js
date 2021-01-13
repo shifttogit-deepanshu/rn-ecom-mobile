@@ -15,13 +15,18 @@ const UserProductScreen = (props)=>{
                 <HeaderButtons HeaderButtonComponent={IconheaderButton} >
                     <Item title="menu" iconName="ios-menu" onPress={()=>{props.navigation.toggleDrawer()}} />
                 </HeaderButtons>
+            ),
+            headerRight:()=>(
+                <HeaderButtons HeaderButtonComponent={IconheaderButton} >
+                    <Item title="create" iconName="ios-create" onPress={()=>{props.navigation.navigate("Edit Item",{productId:0})}} />
+                </HeaderButtons>
             )
         })
     })
     return (
         <FlatList data={props.userProducts} renderItem={itemData=><ProductItem title={itemData.item.title} image={itemData.item.imageUrl} price={itemData.item.price}
         onSelect={()=>console.log("selected from admin")}>
-            <Button title="Edit" onPress={()=>{props.navigation.navigate("Edit Item")}} color={Colors.primaryColor}/>
+            <Button title="Edit" onPress={()=>{props.navigation.navigate("Edit Item",{productId:itemData.item.id})}} color={Colors.primaryColor}/>
             <Button title="Delete" onPress={()=>{props.deleteProduct(itemData.item.id)}} color={Colors.primaryColor}/>
         
         </ProductItem>}/>

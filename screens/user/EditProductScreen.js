@@ -1,9 +1,10 @@
 import React from "react"
 import {View,Text,StyleSheet} from "react-native"
 
-const EditProductScreen = ()=>{
+const EditProductScreen = (props)=>{
+    const id = props.route.params.productId
     return (
-        <View><Text>Edit product Screen</Text></View>
+        <View><Text>Edit product Screen{id}</Text></View>
     )
 }
 
