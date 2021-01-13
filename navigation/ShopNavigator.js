@@ -55,7 +55,7 @@ const adminStackNavigaor = ()=>(
         title:"Your Products"
     }}/>
     <Stack.Screen name="Edit Item" component={EditProductScreen} options={{
-        title:"Edit Product"
+        title:"Add/Edit Product"
     }}/>
     </Stack.Navigator>
 )

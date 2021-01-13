@@ -1,15 +1,77 @@
-import React from "react"
-import {View,Text,StyleSheet} from "react-native"
+import React,{useLayoutEffect,useState} from "react"
+import {View,ScrollView,Text,TextInput,StyleSheet} from "react-native"
+import {HeaderButtons,Item} from 'react-navigation-header-buttons'
+import IconheaderButton from "../../Components/UI/IconHeaderButton"
+import {connect} from "react-redux"
 
 const EditProductScreen = (props)=>{
-    const id = props.route.params.productId
+
+    const prodId = props.route.params.productId
+    let product
+        
+    if(prodId!=0){
+        product = props.products.find(product=>product.id==prodId)
+    }
+        const [title,setTitle] = useState(prodId?product.title:'')
+        const [imageUrl,setImageUrl] = useState(prodId?product.imageUrl:'')
+        const [price,setPrice] = useState(prodId?product.price.toString():'')
+        const [description,setDescription] = useState(prodId?product.description:'')
+    useLayoutEffect(()=>{
+        props.navigation.setOptions({
+            headerRight:()=>(
+                <HeaderButtons HeaderButtonComponent={IconheaderButton} >
+                    <Item title={prodId==0?"Add":"Edit"} onPress={()=>{props.navigation.navigate('Cart')}} />
+                </HeaderButtons>
+            ),
+        })
+    })
+
     return (
-        <View><Text>Edit product Screen{id}</Text></View>
+        <ScrollView>
+        <View style={styles.form}>
+        <View style={styles.formControl}>
+        <Text style={styles.label}>title{prodId}</Text>
+        <TextInput style={styles.input} value={title} onChange={text=>setTitle(text)}/>
+        </View>
+        <View style={styles.formControl}>
+        <Text style={styles.label}>Image Url</Text>
+        <TextInput style={styles.input} value={imageUrl} onChange={text=>setImageUrl(text)}/>
+        </View>
+        <View style={styles.formControl}>
+        <Text style={styles.label}>Price</Text>
+        <TextInput style={styles.input} value={price} onChange={text=>setPrice(text)}/>
+        </View>
+        <View style={styles.formControl}>
+        <Text style={styles.label}>Description</Text>
+        <TextInput style={styles.input} value={description} onChange={text=>setDescription(text)}/>
+        </View>             
+        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-
+    form:{
+        margin:20
+    },
+    formControl:{
+        width:"100%"
+    },
+    label:{
+        marginVertical:8
+    },
+    input:{
+        paddingHorizontal:2,
+        paddingVertical:5,
+        borderBottomColor:"#ccc",
+        borderBottomWidth:2
+    }
 })
 
-export default EditProductScreen
+const mapStateToProps = (state)=>{
+    return {
+        products : state.product.userProducts
+    }
+}
+
+export default connect(mapStateToProps)(EditProductScreen)
