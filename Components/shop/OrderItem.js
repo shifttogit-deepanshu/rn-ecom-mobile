@@ -1,8 +1,18 @@
-import React from "react"
+import React,{useState} from "react"
 import {View,StyleSheet,Text,Button} from "react-native"
 import Colors from "../../settings/Colors"
+import CartItem from "./CartItem"
 
 const OrderItem = (props)=>{
+    const [showDetails,setShowDetails] = useState(false)
+    const transformedcartitems = []
+    for(const key in props.items)
+    transformedcartitems.push({
+        id:key,
+        quantity:props.items[key].quantity,
+        title:props.items[key].productTitle,
+        amount:props.items[key].sum
+    })
     return (
         <View style={styles.orderItem}>
             <View style={styles.summary}>
@@ -10,8 +20,9 @@ const OrderItem = (props)=>{
                 <Text style={styles.date}>{props.date}</Text>
             </View>
             <View style={styles.viewDetails}>
-                <Button title="View Details" color={Colors.primaryColor}/>
+                <Button title="View Details" color={Colors.primaryColor} onPress={()=>setShowDetails(prevState=>!prevState)}/>
             </View>
+            {showDetails && transformedcartitems.map(item=><CartItem key={item.id} quantity={item.quantity} amount={item.amount} title={item.title}/>)}
         </View>
     )
 }

@@ -7,7 +7,7 @@ import IconheaderButton from "../../Components/UI/IconHeaderButton"
 import OrderItem from "../../Components/shop/OrderItem"
 
 const OrderScreen = (props)=>{
-    console.log(props.orders.orders)
+    // console.log(props.orders.orders)
     useLayoutEffect(()=>{
         props.navigation.setOptions({
             headerLeft:()=>(
@@ -19,7 +19,9 @@ const OrderScreen = (props)=>{
     })
     return (
         
-        <FlatList data={props.orders.orders} renderItem={itemData=><OrderItem price={itemData.item.totalAmount} date={itemData.item.getReadableDate()}/>}/>
+        <FlatList data={props.orders.orders} renderItem={itemData=><OrderItem price={itemData.item.totalAmount} date={itemData.item.getReadableDate()} 
+        
+        items={itemData.item.items} />}/>
     )
 }
 

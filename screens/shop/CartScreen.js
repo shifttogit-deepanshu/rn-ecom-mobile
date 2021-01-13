@@ -7,7 +7,7 @@ import { addOrder } from "../../store/actions/order"
 
 
 const CartScreen = (props)=>{
-
+    let deleteButton = true
     const transformedcartitems = []
     for (const key in props.cartItems){
         transformedcartitems.push({
@@ -19,6 +19,7 @@ const CartScreen = (props)=>{
             
         })
     } 
+    
     return (
     <View style={styles.screen}>
         <View style={styles.summary}>
@@ -27,7 +28,7 @@ const CartScreen = (props)=>{
         </View>
         <View>
         <FlatList data={transformedcartitems} renderItem={itemData=><CartItem quantity={itemData.item.quantity} title={itemData.item.title} 
-        amount={itemData.item.sum} product={itemData.item}/>} />
+        amount={itemData.item.sum} product={itemData.item} deleteButton={deleteButton}/>} />
         </View>
     </View>
     )
