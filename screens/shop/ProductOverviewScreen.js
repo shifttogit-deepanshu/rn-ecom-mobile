@@ -1,10 +1,11 @@
 import React,{useLayoutEffect} from "react"
-import {View,FlatList,StyleSheet}  from "react-native"
+import {View,FlatList,StyleSheet,Button}  from "react-native"
 import {connect} from"react-redux"
 import ProductItem from "../../Components/shop/ProductItem"
 import {HeaderButtons,Item} from 'react-navigation-header-buttons'
 import IconheaderButton from "../../Components/UI/IconHeaderButton"
-  
+import Colors from "../../settings/Colors"
+import { addToCart } from "../../store/actions/cart"
 
 const ProductOverviewScreen = (props)=>{
 
@@ -27,11 +28,10 @@ const ProductOverviewScreen = (props)=>{
         <FlatList data={props.products} renderItem={itemData=><ProductItem
             image={itemData.item.imageUrl}
             title={itemData.item.title}
-            price={itemData.item.price}
-            navigation={props.navigation}
-            productId={itemData.item.id}    
-            product={itemData.item}   
-            >{itemData.item.title}</ProductItem>} />
+            price={itemData.item.price} 
+            onSelect={()=>props.navigation.navigate('ProductDetailScreen',{productId:itemData.item.productId,productTitle:itemData.item.productTitle})}
+            ><Button title="View Details" color={Colors.primaryColor} onPress={()=>props.navigation.navigate('ProductDetailScreen',{productId:itemData.item.id,productTitle:itemData.item.title})}/>
+            <Button title="To Cart" color={Colors.primaryColor} onPress={()=>props.toCart(itemData.item)}/></ProductItem>} />
     </View>)
 }
 
@@ -47,5 +47,9 @@ const  mapStateToProps=(state)=>{
       products:state.product.availableProducts
   }
 }
-
-export default connect(mapStateToProps)(ProductOverviewScreen)
+const mapDispatchToprops = (dispatch) =>{
+    return {
+        toCart : (id)=>dispatch(addToCart(id))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToprops)(ProductOverviewScreen)

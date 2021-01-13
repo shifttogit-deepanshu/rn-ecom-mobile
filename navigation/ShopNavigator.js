@@ -9,6 +9,7 @@ import Colors from "../settings/Colors"
 import CartScreen from "../screens/shop/CartScreen"
 import OrderScreen from "../screens/shop/OrderScreen";
 import {Ionicons} from "@expo/vector-icons"
+import UserProductScreen from "../screens/user/UserProductsScreen"
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -43,6 +44,18 @@ const orderStackNavigator = ()=>(
     </Stack.Navigator>
 )
 
+const adminStackNavigaor = ()=>(
+    <Stack.Navigator screenOptions={{
+        headerStyle:{
+            backgroundColor:Colors.primaryColor
+        },
+        headerTintColor:"white"}}>
+    <Stack.Screen name="Admin" component={UserProductScreen} options={{
+        title:"Your Products"
+    }}/>
+    </Stack.Navigator>
+)
+
 const DrawerNavigator = ()=>(
     <Drawer.Navigator drawerContentOptions={{
         activeTintColor:Colors.primaryColor
@@ -62,6 +75,16 @@ const DrawerNavigator = ()=>(
                 drawerIcon: ({focused, size}) => (
                     <Ionicons
                       name="md-cart"
+                      size={20}
+                      color={focused ? Colors.primaryColor : 'black'}
+                    />)
+            }
+        }/>
+        <Drawer.Screen name="Admin" component={adminStackNavigaor}  options={
+            {
+                drawerIcon: ({focused, size}) => (
+                    <Ionicons
+                      name="md-create"
                       size={20}
                       color={focused ? Colors.primaryColor : 'black'}
                     />)
