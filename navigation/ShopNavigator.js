@@ -10,6 +10,7 @@ import CartScreen from "../screens/shop/CartScreen"
 import OrderScreen from "../screens/shop/OrderScreen";
 import {Ionicons} from "@expo/vector-icons"
 import UserProductScreen from "../screens/user/UserProductsScreen"
+import EditProductScreen from "../screens/user/EditProductScreen"
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -52,6 +53,9 @@ const adminStackNavigaor = ()=>(
         headerTintColor:"white"}}>
     <Stack.Screen name="Admin" component={UserProductScreen} options={{
         title:"Your Products"
+    }}/>
+    <Stack.Screen name="Edit Item" component={EditProductScreen} options={{
+        title:"Edit Product"
     }}/>
     </Stack.Navigator>
 )

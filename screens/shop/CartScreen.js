@@ -23,7 +23,7 @@ const CartScreen = (props)=>{
     return (
     <View style={styles.screen}>
         <View style={styles.summary}>
-        <Text style={styles.summaryText}>Total: <Text style={styles.amount}>${props.totalAmount.toFixed(2)}</Text></Text>
+        <Text style={styles.summaryText}>Total: <Text style={styles.amount}>${Math.round(props.totalAmount.toFixed(2)*100)/100}</Text></Text>
         <Button title="Order Now" color={Colors.accentColor} disabled={props.totalAmount==0} onPress={()=>props.addOrder(props.cartItems,props.totalAmount)}/>
         </View>
         <View>

@@ -6,6 +6,7 @@ const initialState = {
 }
 import {REMOVE_FROM_CART} from "../actions/cart"
 import {ADD_ORDER} from "../actions/order"
+import {DELETE_PRODUCT} from "../actions/product"
 
 export const cartReducer = (state=initialState,action)=>{
 
@@ -49,6 +50,16 @@ export const cartReducer = (state=initialState,action)=>{
             }
         case ADD_ORDER:
             return initialState
+
+        case DELETE_PRODUCT:
+            if(!state.items[action.id]){
+                return state
+            }
+            const priceLessed = state.items[action.id].sum
+            const cartItems = {...state.items}
+            delete cartItems[action.id]
+            return {...state,items:cartItems,totalAmount:state.totalAmount-priceLessed}
+
         default:
             return state
     }

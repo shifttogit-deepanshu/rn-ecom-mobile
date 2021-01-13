@@ -5,6 +5,7 @@ import {connect} from "react-redux"
 import {HeaderButtons,Item} from 'react-navigation-header-buttons'
 import IconheaderButton from "../../Components/UI/IconHeaderButton"
 import Colors from "../../settings/Colors"
+import {deleteProduct} from "../../store/actions/product"
 
 
 const UserProductScreen = (props)=>{
@@ -20,8 +21,8 @@ const UserProductScreen = (props)=>{
     return (
         <FlatList data={props.userProducts} renderItem={itemData=><ProductItem title={itemData.item.title} image={itemData.item.imageUrl} price={itemData.item.price}
         onSelect={()=>console.log("selected from admin")}>
-            <Button title="Edit" onPress={()=>{}} color={Colors.primaryColor}/>
-            <Button title="Delete" onPress={()=>{}} color={Colors.primaryColor}/>
+            <Button title="Edit" onPress={()=>{props.navigation.navigate("Edit Item")}} color={Colors.primaryColor}/>
+            <Button title="Delete" onPress={()=>{props.deleteProduct(itemData.item.id)}} color={Colors.primaryColor}/>
         
         </ProductItem>}/>
     )
@@ -33,4 +34,8 @@ const mapStateToProps = (state)=>(
     }
 )
 
-export default connect(mapStateToProps)(UserProductScreen)
+const mapDispatchToProps = (dispatch)=>({
+    deleteProduct : (id)=>dispatch(deleteProduct(id))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(UserProductScreen)
