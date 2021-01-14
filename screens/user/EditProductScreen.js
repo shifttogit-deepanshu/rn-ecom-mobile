@@ -18,7 +18,7 @@ const EditProductScreen = (props)=>{
         const [imageUrl,setImageUrl] = useState(prodId?product.imageUrl:'')
         const [price,setPrice] = useState(prodId?parseInt(product.price,10).toString():'')
         const [description,setDescription] = useState(prodId?product.description:'')
-
+        const [titleIsValid,setTitleIsValid] = useState(false)
         
     useLayoutEffect(()=>{
         props.navigation.setOptions({
@@ -32,12 +32,23 @@ const EditProductScreen = (props)=>{
         })
     })
 
+
+    const titlevalidationHandler = (text)=>{
+        if(text.trim().length==0){
+            setTitleIsValid(false)
+        }
+        else{
+            setTitleIsValid(true)
+        }
+        setTitle(text)
+    }
     return (
         <ScrollView>
         <View style={styles.form}>
         <View style={styles.formControl}>
         <Text style={styles.label}>title{prodId}</Text>
-        <TextInput style={styles.input} value={title} onChangeText={text=>setTitle(text)} autoCapitalize="sentences"/>
+        <TextInput style={styles.input} value={title} onChangeText={text=>titlevalidationHandler(text)} autoCapitalize="sentences"/>
+        {!titleIsValid && <Text>Please Enter a valid title</Text>}
         </View>
         <View style={styles.formControl}>
         <Text style={styles.label}>Image Url</Text>
