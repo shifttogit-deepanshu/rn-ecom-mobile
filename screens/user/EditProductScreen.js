@@ -18,18 +18,31 @@ const EditProductScreen = (props)=>{
 
     const inputReducer = (state,action)=>{
         if(action.type==UPDATE_FORM_INPUT){
-            const updateInputValue = {
-
+            const updateInputValues = {
+                ...state.inputValues,
+                [action.inputIdentifier]:action.fieldValue
+            }
+            const updateInputValidaties = {
+                ...state.inputValidities,
+                [action.inputIdentifier]:action.isValid
+            }
+            let formIsvalid = true
+            for (const key in updateInputValidaties){
+                formIsvalid = formIsvalid && updateInputValidaties
             }
             return {
-
+                inputValues:updateInputValues,
+                inputValidities:updateInputValidaties,
+                formIsValid
             }
         }
+        else {
         return state
+        }
     }
 
     const [inputState,dispatchInput] = useReducer(inputReducer,{
-        InputValues:{
+        inputValues:{
             title:prodId?product.title:'',
             imageUrl:prodId?product.imageUrl:'',
             price:prodId?parseInt(product.price,10).toString():'',
