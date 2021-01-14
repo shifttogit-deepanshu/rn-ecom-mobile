@@ -1,5 +1,5 @@
-import React,{useLayoutEffect,useState,useReducer} from "react"
-import {View,ScrollView,Text,TextInput,StyleSheet} from "react-native"
+import React,{useLayoutEffect,useReducer} from "react"
+import {View,ScrollView,Text,TextInput,StyleSheet,Alert,Button} from "react-native"
 import {HeaderButtons,Item} from 'react-navigation-header-buttons'
 import IconheaderButton from "../../Components/UI/IconHeaderButton"
 import {connect} from "react-redux"
@@ -26,14 +26,14 @@ const EditProductScreen = (props)=>{
                 ...state.inputValidities,
                 [action.inputIdentifier]:action.isValid
             }
-            let formIsvalid = true
+            let updateFormIsvalid = true
             for (const key in updateInputValidaties){
-                formIsvalid = formIsvalid && updateInputValidaties
+                updateFormIsvalid = updateFormIsvalid && updateInputValidaties[key]
             }
             return {
                 inputValues:updateInputValues,
                 inputValidities:updateInputValidaties,
-                formIsValid:formIsvalid
+                formIsValid:updateFormIsvalid
             }
         }
         else {
@@ -71,13 +71,24 @@ const EditProductScreen = (props)=>{
         // const [price,setPrice] = useState(prodId?parseInt(product.price,10).toString():'')
         // const [description,setDescription] = useState(prodId?product.description:'')
         // const [titleIsValid,setTitleIsValid] = useState(false)
+    
+    const onAddEdit = ()=>{
+        console.log(inputState.formIsValid)
+        if(!inputState.formIsValid){
+            Alert.alert("Invalid Input","One or more input iis invalid!",[{text:"confirm"}])
+            return 
+        }
+        prodId==0?props.createItem(inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price):
+        props.updateItem(prodId,inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price)
+        console.log("prod added")
         
+    }
     useLayoutEffect(()=>{
         props.navigation.setOptions({
             headerRight:()=>(
                 <HeaderButtons HeaderButtonComponent={IconheaderButton} >
                     <Item title={prodId==0?"Add":"Edit"} 
-                    onPress={()=>{prodId==0?props.createItem(inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price):props.updateItem(prodId,inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price)} } 
+                    onPress={()=>onAddEdit()} 
                     />
                 </HeaderButtons>
             ),
