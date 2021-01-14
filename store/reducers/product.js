@@ -1,5 +1,5 @@
 import PRODUCTS from "../../data/dummy-data.js"
-import {CREATE_PRODUCT, DELETE_PRODUCT, updateProduct, UPDATE_PRODUCT} from "../actions/product"
+import {CREATE_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT} from "../actions/product"
 import Product from "../../models/product"
 
 const initialState = {
@@ -18,7 +18,7 @@ export const productReducer = (state=initialState,action)=>{
                 return {...state,availableProducts:state.availableProducts.concat(newProduct),userProducts:state.userProducts.concat(newProduct)}
         case UPDATE_PRODUCT:
                 const productIndex = state.userProducts.findIndex(prod=>prod.id==action.pid)
-                updateProduct = new Product(action.pid,state.userProducts[productIndex].ownerId,action.productData.title,action.productData.imageUrl,action.productData.description,action.productData.price)
+                let updateProduct = new Product(action.pid,'u1',action.productData.title,action.productData.imageUrl,action.productData.description,action.productData.price)
                 const updatedProduct = [...state.userProducts]
                 updatedProduct[productIndex] = updateProduct
                 const availableProductIndex = state.availableProducts.findIndex(prod=>prod.id==action.pid)

@@ -10,7 +10,7 @@ const ProductItem = (props)=>{
             <Image style={styles.image} source={{uri:props.image}}/>
             <View style={styles.details}>
             <Text style={styles.title}>{props.title}</Text>
-            <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+            <Text style={styles.price}>${parseInt(props.price,10).toFixed(2)}</Text>
             </View>
             <View style={styles.action}>{props.children}</View>
         </View>

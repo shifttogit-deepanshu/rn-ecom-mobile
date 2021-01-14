@@ -10,7 +10,7 @@ export const deleteProduct = (id)=>{
     }
 }
 
-export const createProduct = ({title,imageUrl,description,price})=>(
+export const createProduct = (title,imageUrl,description,price)=>(
 
         {type:CREATE_PRODUCT,productData:{
             title:title,
@@ -20,7 +20,7 @@ export const createProduct = ({title,imageUrl,description,price})=>(
         }}
 )
 
-export const updateProduct = ({id,title,imageUrl,description,price})=>(
+export const updateProduct = (id,title,imageUrl,description,price)=>(
 
         {type:UPDATE_PRODUCT,
             pid:id,
