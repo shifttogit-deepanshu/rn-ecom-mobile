@@ -37,15 +37,15 @@ const EditProductScreen = (props)=>{
         <View style={styles.form}>
         <View style={styles.formControl}>
         <Text style={styles.label}>title{prodId}</Text>
-        <TextInput style={styles.input} value={title} onChangeText={text=>setTitle(text)}/>
+        <TextInput style={styles.input} value={title} onChangeText={text=>setTitle(text)} autoCapitalize="sentences"/>
         </View>
         <View style={styles.formControl}>
         <Text style={styles.label}>Image Url</Text>
-        <TextInput style={styles.input} value={imageUrl} onChangeText={text=>setImageUrl(text)}/>
+        <TextInput style={styles.input} value={imageUrl} onChangeText={text=>setImageUrl(text)} />
         </View>
         <View style={styles.formControl}>
         <Text style={styles.label}>Price</Text>
-        <TextInput style={styles.input} value={price} onChangeText={text=>setPrice(text)}/>
+        <TextInput style={styles.input} value={price} onChangeText={text=>setPrice(text)} keyboardType='decimal-pad'/>
         </View>
         <View style={styles.formControl}>
         <Text style={styles.label}>Description</Text>
