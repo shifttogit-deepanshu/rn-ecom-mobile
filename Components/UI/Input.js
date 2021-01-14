@@ -5,7 +5,8 @@ const Input =(props)=>{
     return (
         <View style={styles.formControl}>
         <Text style={styles.label}>{props.label}</Text>
-        <TextInput style={styles.input} value={props.value} onChangeText={props.onChangeText} {...props}/>       
+        <TextInput style={styles.input} value={props.value} onChangeText={props.onChangeText} {...props}/>  
+        {props.hasError && <Text style={styles.errorText}>Please fill this field</Text>}     
         </View>
     )
 }
@@ -22,7 +23,11 @@ const styles = StyleSheet.create({
         paddingVertical:5,
         borderBottomColor:"#ccc",
         borderBottomWidth:2
+    },
+    errorText:{
+        color:"red"
     }
 })
+
 
 export default Input

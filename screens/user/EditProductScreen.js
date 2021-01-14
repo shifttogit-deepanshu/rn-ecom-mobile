@@ -110,10 +110,10 @@ const EditProductScreen = (props)=>{
     return (
         <ScrollView>
         <View style={styles.form}>
-        <Input value={inputState.inputValues.title} onChangeText={text=>onInputChange(text,"title")} autoCapitalize="sentences" label="title"/>
-        <Input value={inputState.inputValues.imageUrl} onChangeText={text=>onInputChange(text,"imageUrl")} autoCapitalize="sentences" label="image Url" />
-        <Input value={inputState.inputValues.price} onChangeText={text=>onInputChange(text,"price")} autoCapitalize="sentences" keyboardType='decimal-pad' label="price"/>
-        <Input value={inputState.inputValues.description} onChangeText={text=>onInputChange(text,"description")} autoCapitalize="sentences" label="description" multiline numberOfLines={3}/>       
+        <Input value={inputState.inputValues.title} onChangeText={text=>onInputChange(text,"title")} autoCapitalize="sentences" label="title" hasError={!inputState.inputValidities.title}/>
+        <Input value={inputState.inputValues.imageUrl} onChangeText={text=>onInputChange(text,"imageUrl")} autoCapitalize="sentences" label="image Url" hasError={!inputState.inputValidities.imageUrl}/>
+        <Input value={inputState.inputValues.price} onChangeText={text=>onInputChange(text,"price")} autoCapitalize="sentences" keyboardType='decimal-pad' label="price" hasError={!inputState.inputValidities.price}/>
+        <Input value={inputState.inputValues.description} onChangeText={text=>onInputChange(text,"description")} autoCapitalize="sentences" label="description" multiline numberOfLines={3} hasError={!inputState.inputValidities.description}/>       
         </View>
         </ScrollView>
     )
