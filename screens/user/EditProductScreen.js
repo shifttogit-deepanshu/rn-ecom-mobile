@@ -5,6 +5,7 @@ import IconheaderButton from "../../Components/UI/IconHeaderButton"
 import {connect} from "react-redux"
 import {updateProduct} from "../../store/actions/product"
 import {createProduct} from "../../store/actions/product"
+import Input from "../../Components/UI/Input"
 
 const EditProductScreen = (props)=>{
     const prodId = props.route.params.productId
@@ -109,23 +110,10 @@ const EditProductScreen = (props)=>{
     return (
         <ScrollView>
         <View style={styles.form}>
-        <View style={styles.formControl}>
-        <Text style={styles.label}>title{prodId}</Text>
-        <TextInput style={styles.input} value={inputState.inputValues.title} onChangeText={text=>onInputChange(text,"title")} autoCapitalize="sentences"/>
-        {!inputState.inputValidities.title && <Text>Invallid ! Please check</Text>}
-        </View>
-        <View style={styles.formControl}>
-        <Text style={styles.label}>Image Url</Text>
-        <TextInput style={styles.input} value={inputState.inputValues.imageUrl} onChangeText={text=>onInputChange(text,"imageUrl")} />
-        </View>
-        <View style={styles.formControl}>
-        <Text style={styles.label}>Price</Text>
-        <TextInput style={styles.input} value={inputState.inputValues.price} onChangeText={text=>onInputChange(text,"price")} keyboardType='decimal-pad'/>
-        </View>
-        <View style={styles.formControl}>
-        <Text style={styles.label}>Description</Text>
-        <TextInput style={styles.input} value={inputState.inputValues.description} onChangeText={text=>onInputChange(text,"description")}/>
-        </View>             
+        <Input value={inputState.inputValues.title} onChangeText={text=>onInputChange(text,"title")} autoCapitalize="sentences" label="title"/>
+        <Input value={inputState.inputValues.imageUrl} onChangeText={text=>onInputChange(text,"imageUrl")} autoCapitalize="sentences" label="image Url" />
+        <Input value={inputState.inputValues.price} onChangeText={text=>onInputChange(text,"price")} autoCapitalize="sentences" keyboardType='decimal-pad' label="price"/>
+        <Input value={inputState.inputValues.description} onChangeText={text=>onInputChange(text,"description")} autoCapitalize="sentences" label="description" multiline numberOfLines={3}/>       
         </View>
         </ScrollView>
     )
@@ -134,18 +122,6 @@ const EditProductScreen = (props)=>{
 const styles = StyleSheet.create({
     form:{
         margin:20
-    },
-    formControl:{
-        width:"100%"
-    },
-    label:{
-        marginVertical:8
-    },
-    input:{
-        paddingHorizontal:2,
-        paddingVertical:5,
-        borderBottomColor:"#ccc",
-        borderBottomWidth:2
     }
 })
 
