@@ -1,4 +1,4 @@
-import React,{useLayoutEffect,useState} from "react"
+import React,{useLayoutEffect,useState,useReducer} from "react"
 import {View,ScrollView,Text,TextInput,StyleSheet} from "react-native"
 import {HeaderButtons,Item} from 'react-navigation-header-buttons'
 import IconheaderButton from "../../Components/UI/IconHeaderButton"
@@ -7,30 +7,71 @@ import {updateProduct} from "../../store/actions/product"
 import {createProduct} from "../../store/actions/product"
 
 const EditProductScreen = (props)=>{
-
     const prodId = props.route.params.productId
     let product
         
     if(prodId!=0){
         product = props.products.find(product=>product.id==prodId)
     }
-        const [title,setTitle] = useState(prodId?product.title:'')
-        const [imageUrl,setImageUrl] = useState(prodId?product.imageUrl:'')
-        const [price,setPrice] = useState(prodId?parseInt(product.price,10).toString():'')
-        const [description,setDescription] = useState(prodId?product.description:'')
-        const [titleIsValid,setTitleIsValid] = useState(false)
+
+    const UPDATE_FORM_INPUT = "UPDATE_FORM_INOUT"
+
+    const inputReducer = (state,action)=>{
+        if(action.type==UPDATE_FORM_INPUT){
+            const updateInputValue = {
+
+            }
+            return {
+
+            }
+        }
+        return state
+    }
+
+    const [inputState,dispatchInput] = useReducer(inputReducer,{
+        InputValues:{
+            title:prodId?product.title:'',
+            imageUrl:prodId?product.imageUrl:'',
+            price:prodId?parseInt(product.price,10).toString():'',
+            description:prodId?product.description:'',
+            
+        },
+        inputValidities:{
+            title:prodId?true:false,
+            imageUrl:prodId?true:false,
+            price:prodId?true:false,
+            description:prodId?true:false
+        },
+        formIsValid:prodId?true:false
+    })
+    
+    const onInputChange = (fieldValue,inputIdentifier)=>{
+        let isvalid=true
+        if(fieldValue.length==0){
+            isValid=false
+        }
+
+        dispatchInput({type:UPDATE_FORM_INPUT,fieldValue,isvalid,inputIdentifier})
+    }
+        // const [title,setTitle] = useState(prodId?product.title:'')
+        // const [imageUrl,setImageUrl] = useState(prodId?product.imageUrl:'')
+        // const [price,setPrice] = useState(prodId?parseInt(product.price,10).toString():'')
+        // const [description,setDescription] = useState(prodId?product.description:'')
+        // const [titleIsValid,setTitleIsValid] = useState(false)
         
     useLayoutEffect(()=>{
         props.navigation.setOptions({
             headerRight:()=>(
                 <HeaderButtons HeaderButtonComponent={IconheaderButton} >
                     <Item title={prodId==0?"Add":"Edit"} 
-                    onPress={()=>{prodId==0?props.createItem(title,imageUrl,description,price):props.updateItem(prodId,title,imageUrl,description,price)}} 
+                    onPress={()=>{prodId==0?props.createItem(title,imageUrl,description,price):props.updateItem(prodId,title,imageUrl,description,price)} } 
                     />
                 </HeaderButtons>
             ),
         })
     })
+
+
 
 
     const titlevalidationHandler = (text)=>{
