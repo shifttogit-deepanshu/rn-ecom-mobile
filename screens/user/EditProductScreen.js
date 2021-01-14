@@ -73,14 +73,13 @@ const EditProductScreen = (props)=>{
         // const [titleIsValid,setTitleIsValid] = useState(false)
     
     const onAddEdit = ()=>{
-        console.log(inputState.formIsValid)
         if(!inputState.formIsValid){
             Alert.alert("Invalid Input","One or more input iis invalid!",[{text:"confirm"}])
             return 
         }
         prodId==0?props.createItem(inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price):
         props.updateItem(prodId,inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price)
-        console.log("prod added")
+        props.navigation.goBack()
         
     }
     useLayoutEffect(()=>{
