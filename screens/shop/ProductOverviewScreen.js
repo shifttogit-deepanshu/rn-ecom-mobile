@@ -29,7 +29,7 @@ const ProductOverviewScreen = (props)=>{
             image={itemData.item.imageUrl}
             title={itemData.item.title}
             price={itemData.item.price} 
-            onSelect={()=>props.navigation.navigate('ProductDetailScreen',{productId:itemData.item.productId,productTitle:itemData.item.productTitle})}
+            onSelect={()=>props.navigation.navigate('ProductDetailScreen',{productId:itemData.item.id,productTitle:itemData.item.title})}
             ><Button title="View Details" color={Colors.primaryColor} onPress={()=>props.navigation.navigate('ProductDetailScreen',{productId:itemData.item.id,productTitle:itemData.item.title})}/>
             <Button title="To Cart" color={Colors.primaryColor} onPress={()=>props.toCart(itemData.item)}/></ProductItem>} />
     </View>)
