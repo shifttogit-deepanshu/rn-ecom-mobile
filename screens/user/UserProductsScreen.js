@@ -25,7 +25,7 @@ const UserProductScreen = (props)=>{
     })
     return (
         <FlatList data={props.userProducts} renderItem={itemData=><ProductItem title={itemData.item.title} image={itemData.item.imageUrl} price={itemData.item.price}
-        onSelect={()=>console.log("selected from admin")}>
+        onSelect={()=>{props.navigation.navigate("Edit Item",{productId:itemData.item.id})}}>
             <Button title="Edit" onPress={()=>{props.navigation.navigate("Edit Item",{productId:itemData.item.id})}} color={Colors.primaryColor}/>
             <Button title="Delete" onPress={()=>{props.deleteProduct(itemData.item.id)}} color={Colors.primaryColor}/>
         
