@@ -33,7 +33,7 @@ const EditProductScreen = (props)=>{
             return {
                 inputValues:updateInputValues,
                 inputValidities:updateInputValidaties,
-                formIsValid
+                formIsValid:formIsvalid
             }
         }
         else {
@@ -59,12 +59,12 @@ const EditProductScreen = (props)=>{
     })
     
     const onInputChange = (fieldValue,inputIdentifier)=>{
-        let isvalid=true
+        let isValid=true
         if(fieldValue.length==0){
             isValid=false
         }
 
-        dispatchInput({type:UPDATE_FORM_INPUT,fieldValue,isvalid,inputIdentifier})
+        dispatchInput({type:UPDATE_FORM_INPUT,fieldValue,isValid,inputIdentifier})
     }
         // const [title,setTitle] = useState(prodId?product.title:'')
         // const [imageUrl,setImageUrl] = useState(prodId?product.imageUrl:'')
@@ -77,7 +77,7 @@ const EditProductScreen = (props)=>{
             headerRight:()=>(
                 <HeaderButtons HeaderButtonComponent={IconheaderButton} >
                     <Item title={prodId==0?"Add":"Edit"} 
-                    onPress={()=>{prodId==0?props.createItem(title,imageUrl,description,price):props.updateItem(prodId,title,imageUrl,description,price)} } 
+                    onPress={()=>{prodId==0?props.createItem(inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price):props.updateItem(prodId,inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price)} } 
                     />
                 </HeaderButtons>
             ),
@@ -87,34 +87,34 @@ const EditProductScreen = (props)=>{
 
 
 
-    const titlevalidationHandler = (text)=>{
-        if(text.trim().length==0){
-            setTitleIsValid(false)
-        }
-        else{
-            setTitleIsValid(true)
-        }
-        setTitle(text)
-    }
+    // const titlevalidationHandler = (text)=>{
+    //     if(text.trim().length==0){
+    //         setTitleIsValid(false)
+    //     }
+    //     else{
+    //         setTitleIsValid(true)
+    //     }
+    //     setTitle(text)
+    // }
     return (
         <ScrollView>
         <View style={styles.form}>
         <View style={styles.formControl}>
         <Text style={styles.label}>title{prodId}</Text>
-        <TextInput style={styles.input} value={title} onChangeText={text=>titlevalidationHandler(text)} autoCapitalize="sentences"/>
-        {!titleIsValid && <Text>Please Enter a valid title</Text>}
+        <TextInput style={styles.input} value={inputState.inputValues.title} onChangeText={text=>onInputChange(text,"title")} autoCapitalize="sentences"/>
+        {!inputState.inputValidities.title && <Text>Invallid ! Please check</Text>}
         </View>
         <View style={styles.formControl}>
         <Text style={styles.label}>Image Url</Text>
-        <TextInput style={styles.input} value={imageUrl} onChangeText={text=>setImageUrl(text)} />
+        <TextInput style={styles.input} value={inputState.inputValues.imageUrl} onChangeText={text=>onInputChange(text,"imageUrl")} />
         </View>
         <View style={styles.formControl}>
         <Text style={styles.label}>Price</Text>
-        <TextInput style={styles.input} value={price} onChangeText={text=>setPrice(text)} keyboardType='decimal-pad'/>
+        <TextInput style={styles.input} value={inputState.inputValues.price} onChangeText={text=>onInputChange(text,"price")} keyboardType='decimal-pad'/>
         </View>
         <View style={styles.formControl}>
         <Text style={styles.label}>Description</Text>
-        <TextInput style={styles.input} value={description} onChangeText={text=>setDescription(text)}/>
+        <TextInput style={styles.input} value={inputState.inputValues.description} onChangeText={text=>onInputChange(text,"description")}/>
         </View>             
         </View>
         </ScrollView>
