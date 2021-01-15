@@ -4,7 +4,7 @@ import {HeaderButtons,Item} from 'react-navigation-header-buttons'
 import IconheaderButton from "../../Components/UI/IconHeaderButton"
 import {connect} from "react-redux"
 import {updateProduct} from "../../store/actions/product"
-import {createProduct} from "../../store/actions/product"
+import {addProduct} from "../../store/actions/product"
 import Input from "../../Components/UI/Input"
 
 const EditProductScreen = (props)=>{
@@ -134,7 +134,7 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch)=>(
     {
         updateItem :(prodId,title,imageUrl,description,price)=> dispatch(updateProduct(prodId,title,imageUrl,description,price)),
-        createItem :(title,imageUrl,description,price)=>dispatch(createProduct(title,imageUrl,description,price))
+        createItem :(title,imageUrl,description,price)=>dispatch(addProduct(title,imageUrl,description,price))
     }
 )
 
