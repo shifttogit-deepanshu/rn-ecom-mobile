@@ -1,6 +1,7 @@
 export const DELETE_PRODUCT = "DELETE_PRODUCT"
 export const CREATE_PRODUCT = "CREATE_PRODUCT"
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
+export const SET_PRODUCTS = "SET_PRODUCTS"
 import {database} from "../../firebase/firebaseConfig"
 
 
@@ -34,13 +35,13 @@ export const addProduct = (title,imageUrl,description,price)=>{
     return (dispatch)=>{
         const messageRef = database.ref('/products').push()
         messageRef.set({
-            id:id,
             title:title,
             imageUrl:imageUrl,
             description:description,
             price:price
         }).then(()=>{
             const id = messageRef.key.substring(1)
+
             dispatch(createProduct(id,title,imageUrl,description,price))
         })
     }
