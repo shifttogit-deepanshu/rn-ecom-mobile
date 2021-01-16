@@ -1,5 +1,5 @@
-import React,{useLayoutEffect,useEffect} from "react"
-import {View,FlatList,StyleSheet,Button}  from "react-native"
+import React,{useLayoutEffect,useEffect,useState} from "react"
+import {View,FlatList,StyleSheet,Button,ActivityIndicator}  from "react-native"
 import {connect} from"react-redux"
 import ProductItem from "../../Components/shop/ProductItem"
 import {HeaderButtons,Item} from 'react-navigation-header-buttons'
@@ -10,9 +10,14 @@ import { fetchProducts } from "../../store/actions/product"
 
 const ProductOverviewScreen = (props)=>{
 
+    const [isLoading,setIsLoading] = useState(true)
+    const fetched = ()=>{
+        setIsLoading(false)
+        console.log("fetched")
+    }
     useEffect(()=>{
-        props.fetchProducts()
-    },[])
+        props.fetchProducts(fetched)
+    },[props.fetchProducts])
 
     useLayoutEffect(()=>{
         props.navigation.setOptions({
@@ -28,6 +33,14 @@ const ProductOverviewScreen = (props)=>{
             )
         })
     })
+
+    if(isLoading){
+        return (
+            <View style={styles.screen}>
+                <ActivityIndicator size="large" color={Colors.primaryColor}/>
+            </View>
+        )
+    }
     return (
     <View style={styles.screen}>
         <FlatList data={props.products} renderItem={itemData=><ProductItem
@@ -55,7 +68,7 @@ const  mapStateToProps=(state)=>{
 const mapDispatchToprops = (dispatch) =>{
     return {
         toCart : (id)=>dispatch(addToCart(id)),
-        fetchProducts : ()=>dispatch(fetchProducts())
+        fetchProducts : (fetched)=>dispatch(fetchProducts(fetched))
     }
 }
 export default connect(mapStateToProps,mapDispatchToprops)(ProductOverviewScreen)

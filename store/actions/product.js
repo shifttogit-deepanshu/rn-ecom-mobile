@@ -6,7 +6,7 @@ import Product from "../../models/product"
 import {database} from "../../firebase/firebaseConfig"
 
 
-export const fetchProducts = ()=>{
+export const fetchProducts = (fetched)=>{
     return (dispatch)=>{
         database.ref('/products').once('value').then(snapshot=>{
             const values = snapshot.val()
@@ -16,6 +16,7 @@ export const fetchProducts = ()=>{
                 fetchedValues.push(fetchedProduct)
             }
             dispatch({type:SET_PRODUCTS,productsFetched:fetchedValues})
+            fetched()
         })
     }
 }
