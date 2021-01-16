@@ -12,7 +12,7 @@ const ProductOverviewScreen = (props)=>{
 
     useEffect(()=>{
         props.fetchProducts()
-    })
+    },[])
 
     useLayoutEffect(()=>{
         props.navigation.setOptions({
