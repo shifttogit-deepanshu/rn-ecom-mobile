@@ -8,7 +8,11 @@ import {database} from "../../firebase/firebaseConfig"
 export const fetchProducts = ()=>{
     return (dispatch)=>{
         database.ref('/products').on('value',snapshot=>{
-            console.log(snapshot.val())
+            const values = snapshot.val()
+            for(const key in values){
+                dispatch({type:SET_PRODUCTS,prodId:key.substr(1),fetchedProduct:values[key]})
+                console.log({prodId:key.substr(1),prod:values[key]})
+            }
         })
     }
 }

@@ -1,6 +1,7 @@
 import PRODUCTS from "../../data/dummy-data.js"
 import {CREATE_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT} from "../actions/product"
 import Product from "../../models/product"
+import {SET_PRODUCTS} from "../actions/product"
 
 const initialState = {
     availableProducts:PRODUCTS,
@@ -10,6 +11,8 @@ const initialState = {
 
 export const productReducer = (state=initialState,action)=>{
     switch(action.type){
+        case SET_PRODUCTS:
+            
         case DELETE_PRODUCT:
             return {...state,userProducts:state.userProducts.filter(product=>product.id!=action.id),
                     availableProducts:state.availableProducts.filter(product=>product.id!=action.id)}
