@@ -5,14 +5,14 @@ import {SET_PRODUCTS} from "../actions/product"
 
 const initialState = {
     availableProducts:[],
-    userProducts:PRODUCTS.filter(product=>product.ownerId=='u1')
+    userProducts:[]
 }
-
 
 export const productReducer = (state=initialState,action)=>{
     switch(action.type){
         case SET_PRODUCTS:
-            return {...state,availableProducts:action.productsFetched}
+            const fetchedUserProducts = action.productsFetched.filter(prod=>prod.ownerId=='u2')
+            return {...state,availableProducts:action.productsFetched,userProducts:fetchedUserProducts}
         case DELETE_PRODUCT:
             return {...state,userProducts:state.userProducts.filter(product=>product.id!=action.id),
                     availableProducts:state.availableProducts.filter(product=>product.id!=action.id)}

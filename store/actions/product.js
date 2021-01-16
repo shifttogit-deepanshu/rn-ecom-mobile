@@ -12,9 +12,8 @@ export const fetchProducts = ()=>{
             const values = snapshot.val()
             const fetchedValues = []
             for(const key in values){
-                const fetchedProduct = new Product(key.substr(1),'u1',values[key].title,values[key].imageUrl,values[key].description,values[key].price)
+                const fetchedProduct = new Product(key.substr(1),values[key].ownerId,values[key].title,values[key].imageUrl,values[key].description,values[key].price)
                 fetchedValues.push(fetchedProduct)
-                console.log(fetchedProduct)
             }
             dispatch({type:SET_PRODUCTS,productsFetched:fetchedValues})
         })
@@ -28,10 +27,11 @@ export const deleteProduct = (id)=>{
     }
 }
 
-export const createProduct = (id,title,imageUrl,description,price)=>(
+export const createProduct = (id,ownerId,title,imageUrl,description,price)=>(
 
         {type:CREATE_PRODUCT,productData:{
             id:id,
+            ownerId:ownerId,
             title:title,
             imageUrl:imageUrl,
             description:description,
@@ -39,10 +39,11 @@ export const createProduct = (id,title,imageUrl,description,price)=>(
         }}
 )
 
-export const addProduct = (title,imageUrl,description,price)=>{
+export const addProduct = (ownerId,title,imageUrl,description,price)=>{
     return (dispatch)=>{
         const messageRef = database.ref('/products').push()
         messageRef.set({
+            ownerId:ownerId,
             title:title,
             imageUrl:imageUrl,
             description:description,
@@ -50,7 +51,7 @@ export const addProduct = (title,imageUrl,description,price)=>{
         }).then(()=>{
             const id = messageRef.key.substring(1)
 
-            dispatch(createProduct(id,title,imageUrl,description,price))
+            dispatch(createProduct(id,ownerId,title,imageUrl,description,price))
         })
     }
 }

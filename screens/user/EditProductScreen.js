@@ -78,7 +78,7 @@ const EditProductScreen = (props)=>{
             Alert.alert("Invalid Input","One or more input iis invalid!",[{text:"confirm"}])
             return 
         }
-        prodId==0?props.createItem(inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price):
+        prodId==0?props.createItem('u2',inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price):
         props.updateItem(prodId,inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price)
         props.navigation.goBack()
         
@@ -134,7 +134,7 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch)=>(
     {
         updateItem :(prodId,title,imageUrl,description,price)=> dispatch(updateProduct(prodId,title,imageUrl,description,price)),
-        createItem :(title,imageUrl,description,price)=>dispatch(addProduct(title,imageUrl,description,price))
+        createItem :(ownerId,title,imageUrl,description,price)=>dispatch(addProduct(ownerId,title,imageUrl,description,price))
     }
 )
 
