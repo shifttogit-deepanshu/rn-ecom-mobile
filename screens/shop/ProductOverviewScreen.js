@@ -1,4 +1,4 @@
-import React,{useLayoutEffect} from "react"
+import React,{useLayoutEffect,useEffect} from "react"
 import {View,FlatList,StyleSheet,Button}  from "react-native"
 import {connect} from"react-redux"
 import ProductItem from "../../Components/shop/ProductItem"
@@ -6,8 +6,13 @@ import {HeaderButtons,Item} from 'react-navigation-header-buttons'
 import IconheaderButton from "../../Components/UI/IconHeaderButton"
 import Colors from "../../settings/Colors"
 import { addToCart } from "../../store/actions/cart"
+import { fetchProducts } from "../../store/actions/product"
 
 const ProductOverviewScreen = (props)=>{
+
+    useEffect(()=>{
+        props.fetchProducts()
+    })
 
     useLayoutEffect(()=>{
         props.navigation.setOptions({
@@ -49,7 +54,8 @@ const  mapStateToProps=(state)=>{
 }
 const mapDispatchToprops = (dispatch) =>{
     return {
-        toCart : (id)=>dispatch(addToCart(id))
+        toCart : (id)=>dispatch(addToCart(id)),
+        fetchProducts : ()=>dispatch(fetchProducts())
     }
 }
 export default connect(mapStateToProps,mapDispatchToprops)(ProductOverviewScreen)

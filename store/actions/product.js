@@ -4,6 +4,14 @@ export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
 import {database} from "../../firebase/firebaseConfig"
 
 
+export const fetchProducts = ()=>{
+    return (dispatch)=>{
+        database.ref('/products').on('value',snapshot=>{
+            console.log(snapshot.val())
+        })
+    }
+}
+
 export const deleteProduct = (id)=>{
     return {
         type:DELETE_PRODUCT,
@@ -11,9 +19,10 @@ export const deleteProduct = (id)=>{
     }
 }
 
-export const createProduct = (title,imageUrl,description,price)=>(
+export const createProduct = (id,title,imageUrl,description,price)=>(
 
         {type:CREATE_PRODUCT,productData:{
+            id:id,
             title:title,
             imageUrl:imageUrl,
             description:description,
@@ -23,14 +32,16 @@ export const createProduct = (title,imageUrl,description,price)=>(
 
 export const addProduct = (title,imageUrl,description,price)=>{
     return (dispatch)=>{
-        database.ref('/products').push().set({
+        const messageRef = database.ref('/products').push()
+        messageRef.set({
+            id:id,
             title:title,
             imageUrl:imageUrl,
             description:description,
             price:price
-        }).then((response)=>{
-            console.log(response)
-            dispatch(createProduct(title,imageUrl,description,price))
+        }).then(()=>{
+            const id = messageRef.key.substring(1)
+            dispatch(createProduct(id,title,imageUrl,description,price))
         })
     }
 }
