@@ -11,14 +11,13 @@ import { fetchProducts } from "../../store/actions/product"
 const ProductOverviewScreen = (props)=>{
 
     const [isLoading,setIsLoading] = useState(true)
-    const [refresh,setRefresh] = useState()
     const fetched = ()=>{
         setIsLoading(false)
         console.log("fetched")
     }
     useEffect(()=>{
         props.fetchProducts(fetched)
-    },[props.fetchProducts,refresh])
+    },[props.fetchProducts])
 
     useLayoutEffect(()=>{
         props.navigation.setOptions({

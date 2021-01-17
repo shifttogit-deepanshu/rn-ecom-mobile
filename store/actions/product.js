@@ -8,7 +8,7 @@ import {database} from "../../firebase/firebaseConfig"
 
 export const fetchProducts = (fetched)=>{
     return (dispatch)=>{
-        database.ref('/products').once('value').then(snapshot=>{
+        database.ref('/products').on('value',snapshot=>{
             const values = snapshot.val()
             const fetchedValues = []
             for(const key in values){
@@ -28,17 +28,17 @@ export const deleteProduct = (id)=>{
     }
 }
 
-export const createProduct = (id,ownerId,title,imageUrl,description,price)=>(
+// export const createProduct = (id,ownerId,title,imageUrl,description,price)=>(
 
-        {type:CREATE_PRODUCT,productData:{
-            id:id,
-            ownerId:ownerId,
-            title:title,
-            imageUrl:imageUrl,
-            description:description,
-            price:price
-        }}
-)
+//         {type:CREATE_PRODUCT,productData:{
+//             id:id,
+//             ownerId:ownerId,
+//             title:title,
+//             imageUrl:imageUrl,
+//             description:description,
+//             price:price
+//         }}
+// )
 
 export const addProduct = (ownerId,title,imageUrl,description,price)=>{
     return (dispatch)=>{
