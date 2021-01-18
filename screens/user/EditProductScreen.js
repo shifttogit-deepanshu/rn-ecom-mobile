@@ -1,21 +1,18 @@
 import React,{useLayoutEffect,useReducer} from "react"
-import {View,ScrollView,Text,TextInput,StyleSheet,Alert,Button} from "react-native"
+import {View,ScrollViewStyleSheet,Alert,Button} from "react-native"
 import {HeaderButtons,Item} from 'react-navigation-header-buttons'
 import IconheaderButton from "../../Components/UI/IconHeaderButton"
 import {connect} from "react-redux"
-import {updateProduct} from "../../store/actions/product"
-import {addProduct} from "../../store/actions/product"
 import Input from "../../Components/UI/Input"
+import {database} from "../../firebase/firebaseConfig"
 
 const EditProductScreen = (props)=>{
     const prodId = props.route.params.productId
     let product
-        
     if(prodId!=0){
         product = props.products.find(product=>product.id==prodId)
     }
 
-    const UPDATE_FORM_INPUT = "UPDATE_FORM_INOUT"
 
     const inputReducer = (state,action)=>{
         if(action.type==UPDATE_FORM_INPUT){
@@ -78,8 +75,8 @@ const EditProductScreen = (props)=>{
             Alert.alert("Invalid Input","One or more input iis invalid!",[{text:"confirm"}])
             return 
         }
-        prodId==0?props.createItem('u2',inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price):
-        props.updateItem(prodId,inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price)
+        prodId==0?createItem('u1',inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price):
+        updateItem(prodId,'u1',inputState.inputValues.title,inputState.inputValues.imageUrl,inputState.inputValues.description,inputState.inputValues.price)
         props.navigation.goBack()
         
     }
@@ -95,18 +92,28 @@ const EditProductScreen = (props)=>{
         })
     })
 
+    const createItem = (ownerId,title,imageUrl,description,price)=>{
+        const messageRef = database.ref('/products').push()
+        messageRef.set({
+            ownerId:ownerId,
+            title:title,
+            imageUrl:imageUrl,
+            description:description,
+            price:price
+        })
+    }
 
+    const updateItem = (id,ownerId,title,imageUrl,description,price)=>{
+        const setId = "-" + id
+        database.ref('/products/'+ setId).set({
+            ownerId:ownerId,
+            title:title,
+            imageUrl:imageUrl,
+            description:description,
+            price:price
+        })
+    }
 
-
-    // const titlevalidationHandler = (text)=>{
-    //     if(text.trim().length==0){
-    //         setTitleIsValid(false)
-    //     }
-    //     else{
-    //         setTitleIsValid(true)
-    //     }
-    //     setTitle(text)
-    // }
     return (
         <ScrollView>
         <View style={styles.form}>
@@ -131,11 +138,5 @@ const mapStateToProps = (state)=>{
     }
 }
 
-const mapDispatchToProps = (dispatch)=>(
-    {
-        updateItem :(prodId,title,imageUrl,description,price)=> dispatch(updateProduct(prodId,title,imageUrl,description,price)),
-        createItem :(ownerId,title,imageUrl,description,price)=>dispatch(addProduct(ownerId,title,imageUrl,description,price))
-    }
-)
 
-export default connect(mapStateToProps,mapDispatchToProps)(EditProductScreen)
+export default connect(mapStateToProps)(EditProductScreen)

@@ -28,34 +28,6 @@ export const deleteProduct = (id)=>{
     }
 }
 
-// export const createProduct = (id,ownerId,title,imageUrl,description,price)=>(
-
-//         {type:CREATE_PRODUCT,productData:{
-//             id:id,
-//             ownerId:ownerId,
-//             title:title,
-//             imageUrl:imageUrl,
-//             description:description,
-//             price:price
-//         }}
-// )
-
-export const addProduct = (ownerId,title,imageUrl,description,price)=>{
-    return (dispatch)=>{
-        const messageRef = database.ref('/products').push()
-        messageRef.set({
-            ownerId:ownerId,
-            title:title,
-            imageUrl:imageUrl,
-            description:description,
-            price:price
-        }).then(()=>{
-            const id = messageRef.key.substring(1)
-
-            dispatch(createProduct(id,ownerId,title,imageUrl,description,price))
-        })
-    }
-}
 
 export const updateProduct = (id,title,imageUrl,description,price)=>(
 

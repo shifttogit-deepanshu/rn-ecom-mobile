@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import 'react-native-gesture-handler'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -11,6 +11,7 @@ import OrderScreen from "../screens/shop/OrderScreen";
 import {Ionicons} from "@expo/vector-icons"
 import UserProductScreen from "../screens/user/UserProductsScreen"
 import EditProductScreen from "../screens/user/EditProductScreen"
+import UserAuthScreen from "../screens/user/UserAuthScreen"
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -60,6 +61,17 @@ const adminStackNavigaor = ()=>(
     </Stack.Navigator>
 )
 
+const AuthStackNavigator = ()=>(
+    <Stack.Navigator screenOptions={{
+        headerStyle:{
+            backgroundColor:Colors.primaryColor
+        },
+        headerTintColor:"white"}}>
+    <Stack.Screen name="SignUp" component={UserAuthScreen} options={{
+        title:"Authenticate"
+    }}/>
+    </Stack.Navigator>
+)
 const DrawerNavigator = ()=>(
     <Drawer.Navigator drawerContentOptions={{
         activeTintColor:Colors.primaryColor
@@ -97,8 +109,13 @@ const DrawerNavigator = ()=>(
     </Drawer.Navigator>
 )
 
-export default ShopNavigator = ()=> (
-    <NavigationContainer>
-        <DrawerNavigator />
-    </NavigationContainer>
-)
+export default ShopNavigator = ()=> {
+
+
+
+    return (
+        <NavigationContainer>
+            <DrawerNavigator />
+        </NavigationContainer>
+    )
+}

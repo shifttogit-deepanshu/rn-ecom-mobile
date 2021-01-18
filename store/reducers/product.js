@@ -11,7 +11,7 @@ const initialState = {
 export const productReducer = (state=initialState,action)=>{
     switch(action.type){
         case SET_PRODUCTS:
-            const fetchedUserProducts = action.productsFetched.filter(prod=>prod.ownerId=='u2')
+            const fetchedUserProducts = action.productsFetched.filter(prod=>prod.ownerId=='u1')
             return {...state,availableProducts:action.productsFetched,userProducts:fetchedUserProducts}
         case DELETE_PRODUCT:
             return {...state,userProducts:state.userProducts.filter(product=>product.id!=action.id),
