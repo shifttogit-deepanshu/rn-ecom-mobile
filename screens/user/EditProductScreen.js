@@ -1,5 +1,5 @@
 import React,{useLayoutEffect,useReducer} from "react"
-import {View,ScrollViewStyleSheet,Alert,Button} from "react-native"
+import {View,ScrollView,StyleSheet,Alert} from "react-native"
 import {HeaderButtons,Item} from 'react-navigation-header-buttons'
 import IconheaderButton from "../../Components/UI/IconHeaderButton"
 import {connect} from "react-redux"
