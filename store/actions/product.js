@@ -20,25 +20,3 @@ export const fetchProducts = (fetched)=>{
         })
     }
 }
-
-export const deleteProduct = (id)=>{
-    return {
-        type:DELETE_PRODUCT,
-        id:id
-    }
-}
-
-
-export const updateProduct = (id,title,imageUrl,description,price)=>(
-
-        {type:UPDATE_PRODUCT,
-            pid:id,
-            productData:{
-            title:title,
-            imageUrl:imageUrl,
-            description:description,
-            price:price
-        },
-    }
-    
-)

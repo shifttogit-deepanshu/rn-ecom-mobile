@@ -13,6 +13,7 @@ const EditProductScreen = (props)=>{
         product = props.products.find(product=>product.id==prodId)
     }
 
+    const UPDATE_FORM_INPUT = "UPDATE_FORM_INPUT"
 
     const inputReducer = (state,action)=>{
         if(action.type==UPDATE_FORM_INPUT){
